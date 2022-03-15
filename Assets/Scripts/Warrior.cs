@@ -4,8 +4,18 @@ using UnityEngine;
 
 public class Warrior : BaseClass
 {
-
-    public override void SpecialAbility()
+    void Start()
+    {
+        projectileScript = projectile.GetComponent<Projectile>();
+        base.playerRB = GetComponent<Rigidbody>();
+        projectileScript.damage = 5;
+        ableToShoot = true;
+        rateOfFire = 1;
+        movementSpeed = 2;
+        health = 5;
+    }
+    
+    protected override void SpecialAbility()
     {
 
     }
