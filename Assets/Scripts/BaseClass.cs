@@ -6,7 +6,7 @@ public abstract class BaseClass : MonoBehaviour
 {
     [SerializeField] protected int health;
     protected int damage;
-    protected float rateOfFire;
+    protected float shotDelay;
     protected float horizontalAxis;
     [SerializeField] protected float movementSpeed = 5;
     protected Rigidbody playerRB;
@@ -14,7 +14,15 @@ public abstract class BaseClass : MonoBehaviour
     [SerializeField] protected bool ableToShoot;
     [SerializeField] protected GameObject projectile;
     protected Projectile projectileScript;
+    protected float jumpForce;
     
+
+    protected virtual void CreateCharacter()
+    {
+        projectileScript = projectile.GetComponent<Projectile>();
+        playerRB = GetComponent<Rigidbody>();
+    }
+
 
     // Update is called once per frame
     void Update()
@@ -60,17 +68,17 @@ public abstract class BaseClass : MonoBehaviour
         Vector3 projectileSpawnPos = new Vector3(transform.position.x + 1, transform.position.y, transform.position.z);
         Instantiate(projectile, projectileSpawnPos, projectile.transform.rotation);
         ableToShoot = false;
-        Invoke("ShotCooldown", rateOfFire);
+        Invoke("ResetShotCooldown", shotDelay);
     }
 
-    private void ShotCooldown()
+    private void ResetShotCooldown()
     {
         ableToShoot = true;
     }
 
     protected virtual void Jump()
     {
-        playerRB.AddForce(Vector3.up * 10, ForceMode.Impulse);
+        playerRB.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -94,4 +102,6 @@ public abstract class BaseClass : MonoBehaviour
 
 
     protected abstract void SpecialAbility();
+
+
 }

@@ -7,13 +7,19 @@ public class Mage : BaseClass
 
     void Start()
     {
-        projectileScript = projectile.GetComponent<Projectile>();
-        base.playerRB = GetComponent<Rigidbody>();
-        projectileScript.damage = 5;
+        CreateCharacter();
+    }
+
+    protected override void CreateCharacter()
+    {
+        base.CreateCharacter();
+        projectileScript.damage = 10;
+        projectileScript.projectileSpeed = 2;
         ableToShoot = true;
-        rateOfFire = 2;
+        shotDelay = 2;
         movementSpeed = 2;
         health = 5;
+        jumpForce = 550;
     }
 
     protected override void SpecialAbility()

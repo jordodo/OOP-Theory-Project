@@ -5,11 +5,16 @@ using UnityEngine;
 public class BaseEnemy : MonoBehaviour
 {
     [SerializeField] protected GameObject projectile;
-    [SerializeField] protected int health = 100;
+    [SerializeField] protected int health;
+    protected Projectile projectileScript;
 
     // Start is called before the first frame update
     void Start()
     {
+        projectileScript = projectile.GetComponent<Projectile>();
+        projectileScript.damage = 5;
+        projectileScript.projectileSpeed = 5;
+        health = 100;
         StartCoroutine(Shoot());
 
     }

@@ -6,14 +6,21 @@ public class Warrior : BaseClass
 {
     void Start()
     {
-        projectileScript = projectile.GetComponent<Projectile>();
-        base.playerRB = GetComponent<Rigidbody>();
+        CreateCharacter();
+    }
+
+    protected override void CreateCharacter()
+    {
+        base.CreateCharacter();
         projectileScript.damage = 5;
+        projectileScript.projectileSpeed = 2;
         ableToShoot = true;
-        rateOfFire = 1;
+        shotDelay = 2;
         movementSpeed = 2;
         health = 5;
+        jumpForce = 550;
     }
+
     
     protected override void SpecialAbility()
     {
