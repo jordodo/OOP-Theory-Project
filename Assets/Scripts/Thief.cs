@@ -12,12 +12,12 @@ public class Thief : BaseClass
     protected override void CreateCharacter()
     {
         base.CreateCharacter();
-        projectileScript.damage = 5;
-        projectileScript.projectileSpeed = 2;
+        projectileScript.damage = 2;
+        projectileScript.projectileSpeed = 10;
         ableToShoot = true;
-        shotDelay = 2;
-        movementSpeed = 2;
-        health = 5;
+        shotDelay = 0.2f;
+        movementSpeed = 10;
+        health = 15;
         jumpForce = 550;
     }
 

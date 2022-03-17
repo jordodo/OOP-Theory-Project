@@ -13,11 +13,11 @@ public class Warrior : BaseClass
     {
         base.CreateCharacter();
         projectileScript.damage = 5;
-        projectileScript.projectileSpeed = 2;
+        projectileScript.projectileSpeed = 5;
         ableToShoot = true;
-        shotDelay = 2;
-        movementSpeed = 2;
-        health = 5;
+        shotDelay = 0.6f;
+        movementSpeed = 5;
+        health = 50;
         jumpForce = 550;
     }
 

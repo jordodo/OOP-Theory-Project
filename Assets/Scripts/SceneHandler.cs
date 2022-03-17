@@ -12,10 +12,14 @@ using UnityEditor;
 
 public class SceneHandler : MonoBehaviour
 {
+    //[SerializeField] private MainManager mainManager;
+    [SerializeField] private GameObject currentButton;
+    [SerializeField] private Transform currentCheckmark;
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        //mainManager = GameObject.Find("MainManager").GetComponent<MainManager>();
     }
 
     // Update is called once per frame
@@ -24,9 +28,24 @@ public class SceneHandler : MonoBehaviour
         
     }
 
+    public void ChooseClass()
+    {
+        currentButton = UnityEngine.EventSystems.EventSystem.current.currentSelectedGameObject;
+        currentCheckmark = currentButton.transform.Find(currentButton.name + " Check");
+
+        MainManager.Instance.currentClass = currentButton.name;
+        MainManager.Instance.currentCheckMark = currentCheckmark.gameObject;
+        MainManager.Instance.currentCheckMarkName  = currentCheckmark.gameObject.name;
+        print(MainManager.Instance.currentClass);
+
+    }
+
     public void ToGame()
     {
-        SceneManager.LoadScene(1);     
+        if (MainManager.Instance.currentCheckMark != null && !string.IsNullOrEmpty(MainManager.Instance.currentCheckMarkName))
+        {
+           SceneManager.LoadScene(1);  
+        }    
     }
 
     public void ToMenu()

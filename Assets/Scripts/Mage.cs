@@ -13,12 +13,12 @@ public class Mage : BaseClass
     protected override void CreateCharacter()
     {
         base.CreateCharacter();
-        projectileScript.damage = 10;
+        projectileScript.damage = 15;
         projectileScript.projectileSpeed = 2;
         ableToShoot = true;
         shotDelay = 2;
         movementSpeed = 2;
-        health = 5;
+        health = 30;
         jumpForce = 550;
     }
 

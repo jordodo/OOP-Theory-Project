@@ -13,7 +13,7 @@ public class BaseEnemy : MonoBehaviour
     {
         projectileScript = projectile.GetComponent<Projectile>();
         projectileScript.damage = 5;
-        projectileScript.projectileSpeed = 5;
+        projectileScript.projectileSpeed = 6;
         health = 100;
         StartCoroutine(Shoot());
 
