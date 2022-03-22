@@ -356,7 +356,16 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Warrior\n-high hp\n-medium attacks\n-medium\n movement\n-medium damage"
+  m_text: 'Warrior
+
+    -high hp
+
+    -medium attacks
+
+    -slow movement
+
+    -medium
+    damage'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -2059,10 +2068,13 @@ MonoBehaviour:
   warrior: {fileID: 327784649706747972, guid: 2f75848d969890e40ba6cd852d79c837, type: 3}
   thief: {fileID: 1603521041425891997, guid: 03c3c233ffb28d242a6858ce492890fe, type: 3}
   currentClass: 
+  gameOver: 0
   gravityModifier: 0
   currentCheckMarkName: 
   currentCheckMark: {fileID: 0}
   testMark: {fileID: 0}
+  gameOverScreen: {fileID: 0}
+  timerText: {fileID: 0}
 --- !u!4 &1839151779
 Transform:
   m_ObjectHideFlags: 0
@@ -2134,16 +2146,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Mage
-
-    -medium hp
-
-    -slow attacks
-
-    -slow movement
-
-    -big
-    damage'
+  m_text: "Mage\n-medium hp\n-slow attacks\n-medium \n movement\n-big damage"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}

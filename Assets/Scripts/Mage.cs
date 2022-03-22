@@ -12,18 +12,25 @@ public class Mage : BaseClass
 
     protected override void CreateCharacter()
     {
+        health = 30;
         base.CreateCharacter();
         projectileScript.damage = 15;
-        projectileScript.projectileSpeed = 2;
+        projectileScript.projectileSpeed = 5;
         ableToShoot = true;
+        abilityReady = true;
         shotDelay = 2;
-        movementSpeed = 2;
-        health = 30;
+        movementSpeed = 5;
         jumpForce = 550;
-    }
-
-    protected override void SpecialAbility()
-    {
         
+    }
+    
+    protected override IEnumerator SpecialAbility()
+    {
+        print("1");
+        abilityReady = false;
+        yield return new WaitForSeconds(2);
+        print("2");
+        abilityReady = true;
+
     }
 }

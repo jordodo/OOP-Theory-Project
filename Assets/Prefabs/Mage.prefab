@@ -115,6 +115,7 @@ MonoBehaviour:
   isGrounded: 0
   ableToShoot: 0
   projectile: {fileID: 6072868474537080123, guid: f298fd7551932724a9ee74d56420d24c, type: 3}
+  healthText: {fileID: 0}
 --- !u!54 &1586024065380648425
 Rigidbody:
   m_ObjectHideFlags: 0

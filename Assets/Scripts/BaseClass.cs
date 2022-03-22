@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public abstract class BaseClass : MonoBehaviour
 {
@@ -12,7 +13,9 @@ public abstract class BaseClass : MonoBehaviour
     protected Rigidbody playerRB;
     [SerializeField] protected bool isGrounded;
     [SerializeField] protected bool ableToShoot;
+    [SerializeField] protected bool abilityReady;
     [SerializeField] protected GameObject projectile;
+    [SerializeField] protected TextMeshProUGUI healthText;
     protected Projectile projectileScript;
     protected float jumpForce;
     
@@ -21,24 +24,35 @@ public abstract class BaseClass : MonoBehaviour
     {
         projectileScript = projectile.GetComponent<Projectile>();
         playerRB = GetComponent<Rigidbody>();
+        healthText = GameObject.Find("PlayerHealth").GetComponent<TextMeshProUGUI>();
+        healthText.text = "Your HP: " + health;
+        print("create char");
     }
 
 
     // Update is called once per frame
     void Update()
     {
-        Move();
-        ConstrainMovement();
-        if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
+        if (!MainManager.Instance.gameOver)
         {
-            Jump();
-            isGrounded = false;
-        }
+            Move();
+            ConstrainMovement();
 
-        if (Input.GetKeyDown(KeyCode.Z) && ableToShoot)
-        {
-            print("Yes");
-            Shoot();
+            if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
+            {
+                Jump();
+            }
+
+            if (Input.GetKey(KeyCode.Z) && ableToShoot)
+            {
+                Shoot();
+            }
+
+            if (Input.GetKeyDown(KeyCode.X) && abilityReady)
+            {
+                StartCoroutine(SpecialAbility());
+            }
+        
         }
 
 
@@ -65,7 +79,7 @@ public abstract class BaseClass : MonoBehaviour
 
     protected virtual void Shoot()
     {
-        Vector3 projectileSpawnPos = new Vector3(transform.position.x + 1, transform.position.y, transform.position.z);
+        Vector3 projectileSpawnPos = new Vector3(transform.position.x + 1, transform.position.y, 0);
         Instantiate(projectile, projectileSpawnPos, projectile.transform.rotation);
         ableToShoot = false;
         Invoke("ResetShotCooldown", shotDelay);
@@ -79,6 +93,16 @@ public abstract class BaseClass : MonoBehaviour
     protected virtual void Jump()
     {
         playerRB.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+        isGrounded = false;
+    }
+
+    protected virtual void DeathCheck()
+    {
+        if (health <= 0)
+        {
+            MainManager.Instance.GameOver(false);
+            healthText.text = "Your HP: 0";
+        }  
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -96,12 +120,14 @@ public abstract class BaseClass : MonoBehaviour
         {
             Projectile incomingProjectileScript = other.gameObject.GetComponent<Projectile>();
             health = health - incomingProjectileScript.damage;
+            healthText.text = "Your HP: " + health;
             Destroy(other.gameObject);
+            DeathCheck();
         }
     }
 
 
-    protected abstract void SpecialAbility();
+    protected abstract IEnumerator SpecialAbility();
 
 
 }
