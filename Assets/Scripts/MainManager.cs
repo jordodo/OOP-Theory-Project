@@ -16,17 +16,16 @@ public class MainManager : MonoBehaviour
     [SerializeField] private Mage mage;
     [SerializeField] private Warrior warrior;
     [SerializeField] private Thief thief;
-    public Vector3 spawnPos = new Vector3(-10, 1, 0);
+    private Vector3 spawnPos = new Vector3(-7.5f, 1, 0);
     public static MainManager Instance;
-    public string currentName {get; private set;}
     public string currentClass;
-    public bool gameOver = true;
+    public bool gameOver {get; private set;} = true;
     [SerializeField] private float gravityModifier;
     [SerializeField] public string currentCheckMarkName;
     [SerializeField] public GameObject currentCheckMark;
-    [SerializeField] public GameObject testMark;
-    [SerializeField] public GameObject gameOverScreen;
-    [SerializeField] public TextMeshProUGUI timerText;
+    [SerializeField] private GameObject gameOverScreen;
+    [SerializeField] private TextMeshProUGUI timerText;
+    [SerializeField] public TextMeshProUGUI instructionsText;
     private float currentTime;
     
 
@@ -64,9 +63,9 @@ public class MainManager : MonoBehaviour
 
     public void GameOver(bool playerWin)
     {
-            MainManager.Instance.gameOver = true;
-            MainManager.Instance.gameOverScreen.SetActive(true);
-            TextMeshProUGUI gameOverText = MainManager.Instance.gameOverScreen.transform.Find("GameOver Text").GetComponent<TextMeshProUGUI>();
+            gameOver = true;
+            gameOverScreen.SetActive(true);
+            TextMeshProUGUI gameOverText = gameOverScreen.transform.Find("GameOver Text").GetComponent<TextMeshProUGUI>();
             if (playerWin)
             {
                 gameOverText.text = "Game Over: You Win!";
@@ -76,10 +75,7 @@ public class MainManager : MonoBehaviour
                 gameOverText.text = "Game Over: You Died";
             }
 
-
-            GameObject[] activeProjectiles = GameObject.FindGameObjectsWithTag("Projectile");
-            foreach(GameObject activeProjectile in activeProjectiles)
-            GameObject.Destroy(activeProjectile);
+            DestroyProjectiles();
     }
 
     private void StartGame()
@@ -124,6 +120,13 @@ public class MainManager : MonoBehaviour
             
     }
 
+    private void DestroyProjectiles()
+    {
+        GameObject[] activeProjectiles = GameObject.FindGameObjectsWithTag("Projectile");
+        foreach(GameObject activeProjectile in activeProjectiles)
+        GameObject.Destroy(activeProjectile);       
+    }
+
     //Enables OnSceneLoad
     void OnEnable()
     {
@@ -141,6 +144,8 @@ public class MainManager : MonoBehaviour
 
         if (scene.name == "Menu")
         {
+            instructionsText = GameObject.Find("Instructions").GetComponent<TextMeshProUGUI>();
+
             if (currentCheckMark == null && !string.IsNullOrEmpty(currentCheckMarkName))
             {
                 //print("Finding Checkmark: " + currentCheckMarkName);

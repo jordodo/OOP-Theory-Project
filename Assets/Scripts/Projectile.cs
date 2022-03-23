@@ -8,15 +8,15 @@ public class Projectile : MonoBehaviour
     [SerializeField] private float private_projectileSpeed = 5;
     public float projectileSpeed
     {
-        get { return private_projectileSpeed; }
-        set { private_projectileSpeed = value; }
+        get{return private_projectileSpeed;}
+        set{private_projectileSpeed = value;}
     }
 
     [SerializeField] private int private_damage = 5;
     public int damage
     {
-        get { return private_damage; }
-        set { private_damage = value; }
+        get{return private_damage;}
+        set{private_damage = value;}
     }
 
     // Start is called before the first frame update

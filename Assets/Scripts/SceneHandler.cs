@@ -45,6 +45,10 @@ public class SceneHandler : MonoBehaviour
         if (MainManager.Instance.currentCheckMark != null && !string.IsNullOrEmpty(MainManager.Instance.currentCheckMarkName))
         {
            SceneManager.LoadScene(1);  
+        }
+        else
+        {
+            MainManager.Instance.instructionsText.text = "Please select a Class first";
         }    
     }
 

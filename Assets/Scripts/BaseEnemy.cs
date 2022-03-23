@@ -41,7 +41,7 @@ public class BaseEnemy : MonoBehaviour
         }
     }
 
-    protected virtual void DeathCheck(bool playerWin)
+    protected virtual void DeathCheck()
     {
         if (health <= 0)
         {
@@ -59,7 +59,7 @@ public class BaseEnemy : MonoBehaviour
             health = health - incomingProjectileScript.damage;
             healthText.text = "Enemy HP: " + health;
             Destroy(other.gameObject);
-            DeathCheck(true);
+            DeathCheck();
         }
     }
 }
