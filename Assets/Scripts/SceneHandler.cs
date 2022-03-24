@@ -12,23 +12,11 @@ using UnityEditor;
 
 public class SceneHandler : MonoBehaviour
 {
-    //[SerializeField] private MainManager mainManager;
-    [SerializeField] private GameObject currentButton;
-    [SerializeField] private Transform currentCheckmark;
+    private GameObject currentButton;
+    private Transform currentCheckmark;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        //mainManager = GameObject.Find("MainManager").GetComponent<MainManager>();
-    }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
-    public void ChooseClass()
+    private void ChooseClass()
     {
         currentButton = UnityEngine.EventSystems.EventSystem.current.currentSelectedGameObject;
         currentCheckmark = currentButton.transform.Find(currentButton.name + " Check");
@@ -40,7 +28,7 @@ public class SceneHandler : MonoBehaviour
 
     }
 
-    public void ToGame()
+    private void ToGame()
     {
         if (MainManager.Instance.currentCheckMark != null && !string.IsNullOrEmpty(MainManager.Instance.currentCheckMarkName))
         {
@@ -52,12 +40,12 @@ public class SceneHandler : MonoBehaviour
         }    
     }
 
-    public void ToMenu()
+    private void ToMenu()
     {
         SceneManager.LoadScene(0);    
     }
 
-    public void ExitGame()
+    private void ExitGame()
     {
         #if UNITY_EDITOR
             EditorApplication.ExitPlaymode();

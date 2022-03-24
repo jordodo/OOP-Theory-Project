@@ -37,14 +37,12 @@ public class MainManager : MonoBehaviour
             return;
         }
 
-
-
         Instance = this;
         DontDestroyOnLoad(gameObject);
 
     }
     // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
         currentTime = 0;
         gravityModifier = 2;
@@ -53,7 +51,7 @@ public class MainManager : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    private void Update()
     {
         if (!gameOver)
         {
@@ -61,25 +59,22 @@ public class MainManager : MonoBehaviour
         }
     }
 
-    public void GameOver(bool playerWin)
+    public void GameOver(string textToShow)
     {
             gameOver = true;
             gameOverScreen.SetActive(true);
             TextMeshProUGUI gameOverText = gameOverScreen.transform.Find("GameOver Text").GetComponent<TextMeshProUGUI>();
-            if (playerWin)
-            {
-                gameOverText.text = "Game Over: You Win!";
-            }
-            else
-            {
-                gameOverText.text = "Game Over: You Died";
-            }
+
+            gameOverText.text = textToShow;
+
 
             DestroyProjectiles();
     }
 
     private void StartGame()
     {
+        if (currentClass != null)
+        {
             SpawnCharacter(currentClass);
             gameOver = false;
             currentTime = 0;
@@ -88,10 +83,16 @@ public class MainManager : MonoBehaviour
             timerText.text = "Time: "  + currentTime;
             
             gameOverScreen = GameObject.Find("GameOver");
-            gameOverScreen.SetActive(false);
+            gameOverScreen.SetActive(false); 
+        }
+        else
+        {
+            GameOver("No Class was selected, something went wrong");
+        }
+            
     }
 
-    public void SpawnCharacter(string name)
+    private void SpawnCharacter(string name)
     {
         if (name == "Mage")
         {
@@ -111,13 +112,11 @@ public class MainManager : MonoBehaviour
 
     }
 
-    public void Timer()
+    private void Timer()
     {
-        print("in Timer");
         currentTime += Time.deltaTime;
         int timeToDisplay = Mathf.FloorToInt(currentTime);
         timerText.text = "Time: " + timeToDisplay;
-            
     }
 
     private void DestroyProjectiles()
@@ -128,15 +127,14 @@ public class MainManager : MonoBehaviour
     }
 
     //Enables OnSceneLoad
-    void OnEnable()
+    private void OnEnable()
     {
         SceneManager.sceneLoaded += OnSceneLoaded;
     }
 
     //Called whenever the scene is loaded
-    void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        //print("A scene loaded");
         if (scene.name == "Main" && currentClass != null)
         {
             StartGame();
@@ -148,16 +146,14 @@ public class MainManager : MonoBehaviour
 
             if (currentCheckMark == null && !string.IsNullOrEmpty(currentCheckMarkName))
             {
-                //print("Finding Checkmark: " + currentCheckMarkName);
                 currentCheckMark = GameObject.Find(currentCheckMarkName);
-                //print(currentCheckMark);
                 currentCheckMark.GetComponent<Image>().enabled = true;
             }
         }
     }
 
     //Disables OnSceneLoad
-    void OnDisable()
+    private void OnDisable()
     {
         SceneManager.sceneLoaded -= OnSceneLoaded;
     } 

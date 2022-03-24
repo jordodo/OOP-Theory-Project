@@ -110,7 +110,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   private_projectileSpeed: 5
-  private_damage: 15
+  private_damage: 10
 --- !u!54 &6072868474537080117
 Rigidbody:
   m_ObjectHideFlags: 0

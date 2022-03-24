@@ -10,11 +10,16 @@ public class Mage : BaseClass
         CreateCharacter();
     }
 
+    protected override void Update()
+    {
+        base.Update();
+    }
+
     protected override void CreateCharacter()
     {
         health = 30;
         base.CreateCharacter();
-        projectileScript.damage = 15;
+        projectileScript.damage = 10;
         projectileScript.projectileSpeed = 5;
         ableToShoot = true;
         abilityReady = true;
@@ -47,7 +52,5 @@ public class Mage : BaseClass
 
         currentTime = cooldownTime + 1;
         abilityActive = false;
-        Invoke("ResetAbilityCooldown", cooldownTime);
-
     }
 }

@@ -11,9 +11,9 @@ public class EnemyProjectile : Projectile
     }
 
     // Update is called once per frame
-    void Update()
+    protected override void Update()
     {
         Move(Vector3.left);
-        DestroyOutOfBounds();
+        base.Update();
     }
 }

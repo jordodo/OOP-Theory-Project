@@ -9,6 +9,11 @@ public class Warrior : BaseClass
         CreateCharacter();
     }
 
+    protected override void Update()
+    {
+        base.Update();
+    }
+
     protected override void CreateCharacter()
     {
         health = 40;    
@@ -37,9 +42,6 @@ public class Warrior : BaseClass
         yield return new WaitForSeconds(abilityActiveTime);
         currentTime = cooldownTime + 1;
         abilityActive = false;
-        Invoke("ResetAbilityCooldown", cooldownTime);
-
-
     }
 
 }

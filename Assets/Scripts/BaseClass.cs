@@ -5,25 +5,30 @@ using TMPro;
 
 public abstract class BaseClass : MonoBehaviour
 {
-    [SerializeField] protected int health;
+    //Variables
+    //Stats for each unit
+    protected int health;
     protected int damage;
     protected float shotDelay;
     protected float cooldownTime;
     protected float currentTime;
     protected float abilityActiveTime;
     protected float horizontalAxis;
-    [SerializeField] protected float movementSpeed = 5;
-    protected Rigidbody playerRB;
-    [SerializeField] protected bool isGrounded;
-    [SerializeField] protected bool ableToShoot;
-    [SerializeField] protected bool abilityReady;
-    [SerializeField] protected bool abilityActive;
-    [SerializeField] protected GameObject projectile;
-    [SerializeField] protected TextMeshProUGUI healthText;
-    [SerializeField] protected TextMeshProUGUI abilityText;
-    protected Projectile projectileScript;
+    protected float movementSpeed;
     protected float jumpForce;
+    protected bool isGrounded;
+    protected bool ableToShoot;
+    protected bool abilityReady;
+    protected bool abilityActive;
 
+    //Necessary components
+    protected Rigidbody playerRB;
+    [SerializeField] protected GameObject projectile;
+    protected TextMeshProUGUI healthText;
+    protected TextMeshProUGUI abilityText;
+    protected Projectile projectileScript;
+    
+    //Movement bounds
     protected float leftBound = -12;
     protected float rightBound = 8;
     
@@ -36,14 +41,14 @@ public abstract class BaseClass : MonoBehaviour
         healthText.text = "Your HP: " + health;
         abilityText = GameObject.Find("AbilityTimer").GetComponent<TextMeshProUGUI>();
         abilityText.text = "Ability: READY";
-                abilityReady = true;
-                abilityActive = false;
+        abilityReady = true;
+        abilityActive = false;
         print("create char");
     }
 
 
     // Update is called once per frame
-    void Update()
+    protected virtual void Update()
     {
         if (!MainManager.Instance.gameOver)
         {
@@ -72,7 +77,7 @@ public abstract class BaseClass : MonoBehaviour
 
             if (!abilityReady && !abilityActive)
             {
-                CountDownTimer("Ability CD:");
+                CountDownTimer("Ability CD:", true);
             }
         }
 
@@ -126,15 +131,32 @@ public abstract class BaseClass : MonoBehaviour
         }
     }
 
+    private void CountDownTimer(string text, bool resetCooldown)
+    {
+        if (currentTime > 1)
+        {
+            int timeToDisplay = Mathf.FloorToInt(currentTime % 60);
+            //print(timeToDisplay);
+            abilityText.text = text + " " + timeToDisplay;
+            currentTime -= Time.deltaTime;
+        }
+        else
+        {
+            currentTime = 0;
+            if (resetCooldown)
+            {
+                ResetAbilityCooldown();             
+            }
+
+        }
+    }
+
 
     private void ResetAbilityCooldown()
     {
         abilityReady = true;
-        if (!MainManager.Instance.gameOver)
-        {
-            abilityText.text = "Ability: READY";
-        }
-    }
+        abilityText.text = "Ability: READY";
+     }
 
     protected virtual void Jump()
     {
@@ -146,7 +168,7 @@ public abstract class BaseClass : MonoBehaviour
     {
         if (health <= 0)
         {
-            MainManager.Instance.GameOver(false);
+            MainManager.Instance.GameOver("Game Over: You Died");
             healthText.text = "Your HP: 0";
         }  
     }
@@ -160,7 +182,7 @@ public abstract class BaseClass : MonoBehaviour
             DeathCheck();
     }
 
-    private void OnCollisionEnter(Collision collision)
+    protected virtual void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.CompareTag("Ground"))
         {
@@ -169,7 +191,7 @@ public abstract class BaseClass : MonoBehaviour
 
     }
     
-    private void OnTriggerEnter(Collider other)
+    protected virtual void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("Projectile"))
         {

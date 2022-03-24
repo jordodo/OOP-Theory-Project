@@ -25,12 +25,17 @@ public class Projectile : MonoBehaviour
         
     }
 
-    public virtual void Move(Vector3 direction)
+    protected virtual void Update()
+    {
+        DestroyOutOfBounds();
+    }
+
+    protected virtual void Move(Vector3 direction)
     {
         transform.Translate(direction * projectileSpeed * Time.deltaTime);
     }
     
-    public virtual void DestroyOutOfBounds()
+    protected virtual void DestroyOutOfBounds()
     {
         if (Mathf.Abs(transform.position.x) > 15)
         {

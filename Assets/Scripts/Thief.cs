@@ -4,18 +4,23 @@ using UnityEngine;
 
 public class Thief : BaseClass
 {
-    private bool inShadows;
+    protected bool inShadows;
 
     void Start()
     {
         CreateCharacter();
     }
 
+    protected override void Update()
+    {
+        base.Update();
+    }
+
     protected override void CreateCharacter()
     {
         health = 15;
         base.CreateCharacter();
-        projectileScript.damage = 2;
+        projectileScript.damage = 1;
         projectileScript.projectileSpeed = 10;
         ableToShoot = true;
         shotDelay = 0.2f;
@@ -30,7 +35,7 @@ public class Thief : BaseClass
 
     }
     
-    private void OnTriggerEnter(Collider other)
+    protected override void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("Projectile") && !inShadows)
         {
@@ -54,7 +59,5 @@ public class Thief : BaseClass
         currentTime = cooldownTime + 1;
         abilityActive = false;
         gameObject.GetComponent<MeshRenderer>().material.color = color;
-        Invoke("ResetAbilityCooldown", cooldownTime);
-
     }
 }

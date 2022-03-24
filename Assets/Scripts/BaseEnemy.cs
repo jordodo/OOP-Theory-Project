@@ -6,20 +6,23 @@ using TMPro;
 public class BaseEnemy : MonoBehaviour
 {
     [SerializeField] protected GameObject projectile;
-    [SerializeField] protected int health;
-    [SerializeField] protected TextMeshProUGUI healthText;
+    protected int health;
+    protected TextMeshProUGUI healthText;
     protected Projectile projectileScript;
 
     // Start is called before the first frame update
     void Start()
     {
-        projectileScript = projectile.GetComponent<Projectile>();
-        projectileScript.damage = 5;
-        projectileScript.projectileSpeed = 6;
-        health = 500;
-        healthText = GameObject.Find("EnemyHealth").GetComponent<TextMeshProUGUI>();
-        healthText.text = "Enemy HP: " + health;
-        StartCoroutine(Shoot());
+        if (MainManager.Instance != null)
+        {
+            projectileScript = projectile.GetComponent<Projectile>();
+            projectileScript.damage = 5;
+            projectileScript.projectileSpeed = 6;
+            health = 500;
+            healthText = GameObject.Find("EnemyHealth").GetComponent<TextMeshProUGUI>();
+            healthText.text = "Enemy HP: " + health;
+            StartCoroutine(Shoot());
+        }        
 
     }
 
@@ -45,9 +48,18 @@ public class BaseEnemy : MonoBehaviour
     {
         if (health <= 0)
         {
-            MainManager.Instance.GameOver(true);
+            MainManager.Instance.GameOver("Game Over: You Win!");
             healthText.text = "Enemy HP: 0";
         }  
+    }
+
+    protected void IncomingProjectile(Collider other)
+    {
+            Projectile incomingProjectileScript = other.gameObject.GetComponent<Projectile>();
+            health = health - incomingProjectileScript.damage;
+            healthText.text = "Enemy HP: " + health;
+            Destroy(other.gameObject);
+            DeathCheck();
     }
 
 
@@ -55,11 +67,7 @@ public class BaseEnemy : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Projectile"))
         {
-            Projectile incomingProjectileScript = other.gameObject.GetComponent<Projectile>();
-            health = health - incomingProjectileScript.damage;
-            healthText.text = "Enemy HP: " + health;
-            Destroy(other.gameObject);
-            DeathCheck();
+            IncomingProjectile(other);
         }
     }
 }
