@@ -13,20 +13,23 @@ using UnityEditor;
 
 public class MainManager : MonoBehaviour
 {
+    //Variables and object references
     [SerializeField] private Mage mage;
     [SerializeField] private Warrior warrior;
     [SerializeField] private Thief thief;
-    private Vector3 spawnPos = new Vector3(-7.5f, 1, 0);
-    public static MainManager Instance;
-    public string currentClass;
-    public bool gameOver {get; private set;} = true;
-    [SerializeField] private float gravityModifier;
-    [SerializeField] public string currentCheckMarkName;
-    [SerializeField] public GameObject currentCheckMark;
     [SerializeField] private GameObject gameOverScreen;
     [SerializeField] private TextMeshProUGUI timerText;
-    [SerializeField] public TextMeshProUGUI instructionsText;
+    private Vector3 spawnPos = new Vector3(-7.5f, 1, 0);
+    private float gravityModifier;
     private float currentTime;
+    private string currentClass;
+
+    //ENCAPSULATION
+    [SerializeField] public string currentCheckMarkName {get; private set;}
+    [SerializeField] public GameObject currentCheckMark {get; private set;}
+    public bool gameOver {get; private set;} = true;
+    public static MainManager Instance {get; private set;}
+    
     
 
     private void Awake()
@@ -57,6 +60,13 @@ public class MainManager : MonoBehaviour
         {
             Timer();
         }
+    }
+
+    public void SetCurrentClass(GameObject button, GameObject checkMark)
+    {
+        currentClass = button.name;
+        currentCheckMark = checkMark;
+        currentCheckMarkName  = checkMark.name;
     }
 
     public void GameOver(string textToShow)
@@ -96,7 +106,7 @@ public class MainManager : MonoBehaviour
     {
         if (name == "Mage")
         {
-            Instantiate(mage, spawnPos, mage.transform.rotation);
+            Instantiate(mage.gameObject, spawnPos, mage.transform.rotation);
         }
 
         if (name == "Warrior")
@@ -142,7 +152,7 @@ public class MainManager : MonoBehaviour
 
         if (scene.name == "Menu")
         {
-            instructionsText = GameObject.Find("Instructions").GetComponent<TextMeshProUGUI>();
+            //instructionsText = GameObject.Find("Instructions").GetComponent<TextMeshProUGUI>();
 
             if (currentCheckMark == null && !string.IsNullOrEmpty(currentCheckMarkName))
             {

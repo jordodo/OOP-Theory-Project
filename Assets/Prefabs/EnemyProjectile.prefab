@@ -109,8 +109,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 598b57c77bbfbd74a85d17ddf286c648, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  private_projectileSpeed: 5
-  private_damage: 5
+  private_projectileSpeed: 0
+  private_damage: 0
 --- !u!54 &6626533360398765112
 Rigidbody:
   m_ObjectHideFlags: 0

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+//INHERITANCE - CHILD
 public class Thief : BaseClass
 {
     protected bool inShadows;
@@ -16,6 +17,7 @@ public class Thief : BaseClass
         base.Update();
     }
 
+    //POLYMORPHISM
     protected override void CreateCharacter()
     {
         health = 15;
@@ -34,7 +36,8 @@ public class Thief : BaseClass
         
 
     }
-    
+
+    //POLYMORPHISM
     protected override void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("Projectile") && !inShadows)
@@ -43,6 +46,7 @@ public class Thief : BaseClass
         }
     }
 
+    //POLYMORPHISM
     protected override IEnumerator SpecialAbility()
     {
         Color color = gameObject.GetComponent<MeshRenderer>().material.color;

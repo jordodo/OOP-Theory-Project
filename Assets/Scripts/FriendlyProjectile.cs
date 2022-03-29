@@ -10,7 +10,7 @@ public class FriendlyProjectile : Projectile
         
     }
 
-    // Update is called once per frame
+    //POLYMORPHISM
     protected override void Update()
     {
         Move(Vector3.right);

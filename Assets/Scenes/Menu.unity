@@ -1129,8 +1129,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a3863bbe9cc33fa4894764669a2a04b9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentButton: {fileID: 0}
-  currentCheckmark: {fileID: 0}
+  instructionsText: {fileID: 1927513958}
 --- !u!4 &1041820410
 Transform:
   m_ObjectHideFlags: 0
@@ -2075,16 +2074,10 @@ MonoBehaviour:
   mage: {fileID: 1586024065380648430, guid: 160c1cc5dce179e439fb3df383f70317, type: 3}
   warrior: {fileID: 327784649706747972, guid: 2f75848d969890e40ba6cd852d79c837, type: 3}
   thief: {fileID: 1603521041425891997, guid: 03c3c233ffb28d242a6858ce492890fe, type: 3}
-  spawnPos: {x: -10, y: 1, z: 0}
-  currentClass: 
-  gameOver: 0
   gravityModifier: 0
-  currentCheckMarkName: 
-  currentCheckMark: {fileID: 0}
-  testMark: {fileID: 0}
   gameOverScreen: {fileID: 0}
   timerText: {fileID: 0}
-  instructionsText: {fileID: 0}
+  currentClass: 
 --- !u!4 &1839151779
 Transform:
   m_ObjectHideFlags: 0

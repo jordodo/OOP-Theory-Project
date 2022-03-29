@@ -14,6 +14,7 @@ public class SceneHandler : MonoBehaviour
 {
     private GameObject currentButton;
     private Transform currentCheckmark;
+    [SerializeField] private TextMeshProUGUI instructionsText;
 
 
     private void ChooseClass()
@@ -21,10 +22,7 @@ public class SceneHandler : MonoBehaviour
         currentButton = UnityEngine.EventSystems.EventSystem.current.currentSelectedGameObject;
         currentCheckmark = currentButton.transform.Find(currentButton.name + " Check");
 
-        MainManager.Instance.currentClass = currentButton.name;
-        MainManager.Instance.currentCheckMark = currentCheckmark.gameObject;
-        MainManager.Instance.currentCheckMarkName  = currentCheckmark.gameObject.name;
-        print(MainManager.Instance.currentClass);
+        MainManager.Instance.SetCurrentClass(currentButton, currentCheckmark.gameObject);
 
     }
 
@@ -36,7 +34,7 @@ public class SceneHandler : MonoBehaviour
         }
         else
         {
-            MainManager.Instance.instructionsText.text = "Please select a Class first";
+            instructionsText.text = "Please select a Class first";
         }    
     }
 

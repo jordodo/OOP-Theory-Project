@@ -59,6 +59,7 @@ public class BaseEnemy : MonoBehaviour
             health = health - incomingProjectileScript.damage;
             healthText.text = "Enemy HP: " + health;
             Destroy(other.gameObject);
+            //ABSTRACTION
             DeathCheck();
     }
 
@@ -67,6 +68,7 @@ public class BaseEnemy : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Projectile"))
         {
+            //ABSTRACTION
             IncomingProjectile(other);
         }
     }

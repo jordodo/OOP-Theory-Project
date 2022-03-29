@@ -2,11 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+//INHERITANCE - CHILD
 public class Mage : BaseClass
 {
 
     void Start()
     {
+        //ABSTRACTION
         CreateCharacter();
     }
 
@@ -15,6 +17,7 @@ public class Mage : BaseClass
         base.Update();
     }
 
+    //POLYMORPHISM
     protected override void CreateCharacter()
     {
         health = 30;
@@ -33,7 +36,7 @@ public class Mage : BaseClass
         
     }
 
-    
+    //POLYMORPHISM
     protected override IEnumerator SpecialAbility()
     {
         shotDelay /= 2;

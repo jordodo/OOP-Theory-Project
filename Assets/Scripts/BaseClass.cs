@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
+//INHERITANCE - PARENT
 public abstract class BaseClass : MonoBehaviour
 {
     //Variables
@@ -43,11 +44,10 @@ public abstract class BaseClass : MonoBehaviour
         abilityText.text = "Ability: READY";
         abilityReady = true;
         abilityActive = false;
-        print("create char");
     }
 
 
-    // Update is called once per frame
+    //ABSTRACTION
     protected virtual void Update()
     {
         if (!MainManager.Instance.gameOver)
@@ -116,6 +116,7 @@ public abstract class BaseClass : MonoBehaviour
         ableToShoot = true;
     }
 
+    //POLYMORPHISM
     private void CountDownTimer(string text)
     {
         if (currentTime > 1)
@@ -131,6 +132,7 @@ public abstract class BaseClass : MonoBehaviour
         }
     }
 
+    //POLYMORPHISM
     private void CountDownTimer(string text, bool resetCooldown)
     {
         if (currentTime > 1)
@@ -145,6 +147,7 @@ public abstract class BaseClass : MonoBehaviour
             currentTime = 0;
             if (resetCooldown)
             {
+                //ABSTRACTION
                 ResetAbilityCooldown();             
             }
 
@@ -179,6 +182,7 @@ public abstract class BaseClass : MonoBehaviour
             health = health - incomingProjectileScript.damage;
             healthText.text = "Your HP: " + health;
             Destroy(other.gameObject);
+            //ABSTRACTION
             DeathCheck();
     }
 
@@ -195,6 +199,7 @@ public abstract class BaseClass : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Projectile"))
         {
+            //ABSTRACTION
             IncomingProjectile(other);
         }
     }
@@ -202,10 +207,14 @@ public abstract class BaseClass : MonoBehaviour
     protected void ColorProjectile()
     {
         MeshRenderer currentMesh = gameObject.GetComponent<MeshRenderer>();
+        //print(currentMesh);
         MeshRenderer projectileMesh = projectile.GetComponent<MeshRenderer>();
+        //print(projectileMesh);
 
         projectileMesh.material = currentMesh.material;
+        print("Coloring");
     }
+
 
     protected abstract IEnumerator SpecialAbility();
 

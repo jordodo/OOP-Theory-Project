@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+//INHERITANCE - CHILD
 public class Warrior : BaseClass
 {
     void Start()
@@ -14,6 +15,7 @@ public class Warrior : BaseClass
         base.Update();
     }
 
+    //POLYMORPHISM
     protected override void CreateCharacter()
     {
         health = 40;    
@@ -31,7 +33,7 @@ public class Warrior : BaseClass
         
     }
 
-    
+    //POLYMORPHISM
     protected override IEnumerator SpecialAbility()
     {
         health = health + 10;
