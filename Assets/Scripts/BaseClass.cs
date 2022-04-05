@@ -28,11 +28,11 @@ public abstract class BaseClass : MonoBehaviour
     protected TextMeshProUGUI healthText;
     protected TextMeshProUGUI abilityText;
     protected Projectile projectileScript;
-    
+
     //Movement bounds
     protected float leftBound = -12;
     protected float rightBound = 8;
-    
+
 
     protected virtual void CreateCharacter()
     {
@@ -122,7 +122,6 @@ public abstract class BaseClass : MonoBehaviour
         if (currentTime > 1)
         {
             int timeToDisplay = Mathf.FloorToInt(currentTime % 60);
-            //print(timeToDisplay);
             abilityText.text = text + " " + timeToDisplay;
             currentTime -= Time.deltaTime;
         }
@@ -138,7 +137,6 @@ public abstract class BaseClass : MonoBehaviour
         if (currentTime > 1)
         {
             int timeToDisplay = Mathf.FloorToInt(currentTime % 60);
-            //print(timeToDisplay);
             abilityText.text = text + " " + timeToDisplay;
             currentTime -= Time.deltaTime;
         }
@@ -148,7 +146,7 @@ public abstract class BaseClass : MonoBehaviour
             if (resetCooldown)
             {
                 //ABSTRACTION
-                ResetAbilityCooldown();             
+                ResetAbilityCooldown();
             }
 
         }
@@ -159,7 +157,7 @@ public abstract class BaseClass : MonoBehaviour
     {
         abilityReady = true;
         abilityText.text = "Ability: READY";
-     }
+    }
 
     protected virtual void Jump()
     {
@@ -173,17 +171,17 @@ public abstract class BaseClass : MonoBehaviour
         {
             MainManager.Instance.GameOver("Game Over: You Died");
             healthText.text = "Your HP: 0";
-        }  
+        }
     }
 
     protected void IncomingProjectile(Collider other)
     {
-            Projectile incomingProjectileScript = other.gameObject.GetComponent<Projectile>();
-            health = health - incomingProjectileScript.damage;
-            healthText.text = "Your HP: " + health;
-            Destroy(other.gameObject);
-            //ABSTRACTION
-            DeathCheck();
+        Projectile incomingProjectileScript = other.gameObject.GetComponent<Projectile>();
+        health = health - incomingProjectileScript.damage;
+        healthText.text = "Your HP: " + health;
+        Destroy(other.gameObject);
+        //ABSTRACTION
+        DeathCheck();
     }
 
     protected virtual void OnCollisionEnter(Collision collision)
@@ -191,10 +189,10 @@ public abstract class BaseClass : MonoBehaviour
         if (collision.gameObject.CompareTag("Ground"))
         {
             isGrounded = true;
-        } 
+        }
 
     }
-    
+
     protected virtual void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("Projectile"))
@@ -207,9 +205,7 @@ public abstract class BaseClass : MonoBehaviour
     protected void ColorProjectile()
     {
         MeshRenderer currentMesh = gameObject.GetComponent<MeshRenderer>();
-        //print(currentMesh);
         MeshRenderer projectileMesh = projectile.GetComponent<MeshRenderer>();
-        //print(projectileMesh);
 
         projectileMesh.material = currentMesh.material;
         print("Coloring");

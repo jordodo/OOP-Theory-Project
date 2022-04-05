@@ -33,7 +33,7 @@ public class Mage : BaseClass
         abilityActiveTime = 5f;
 
         ColorProjectile();
-        
+
     }
 
     //POLYMORPHISM
@@ -44,7 +44,7 @@ public class Mage : BaseClass
         projectileScript.projectileSpeed *= 1.5f;
         ableToShoot = true;
 
-        currentTime = abilityActiveTime +1;
+        currentTime = abilityActiveTime + 1;
         abilityReady = false;
         abilityActive = true;
         yield return new WaitForSeconds(abilityActiveTime);

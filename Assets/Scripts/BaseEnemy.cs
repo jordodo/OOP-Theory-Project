@@ -5,6 +5,7 @@ using TMPro;
 
 public class BaseEnemy : MonoBehaviour
 {
+    //Variables and Components
     [SerializeField] protected GameObject projectile;
     protected int health;
     protected TextMeshProUGUI healthText;
@@ -22,14 +23,14 @@ public class BaseEnemy : MonoBehaviour
             healthText = GameObject.Find("EnemyHealth").GetComponent<TextMeshProUGUI>();
             healthText.text = "Enemy HP: " + health;
             StartCoroutine(Shoot());
-        }        
+        }
 
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     protected virtual IEnumerator Shoot()
@@ -50,17 +51,17 @@ public class BaseEnemy : MonoBehaviour
         {
             MainManager.Instance.GameOver("Game Over: You Win!");
             healthText.text = "Enemy HP: 0";
-        }  
+        }
     }
 
     protected void IncomingProjectile(Collider other)
     {
-            Projectile incomingProjectileScript = other.gameObject.GetComponent<Projectile>();
-            health = health - incomingProjectileScript.damage;
-            healthText.text = "Enemy HP: " + health;
-            Destroy(other.gameObject);
-            //ABSTRACTION
-            DeathCheck();
+        Projectile incomingProjectileScript = other.gameObject.GetComponent<Projectile>();
+        health = health - incomingProjectileScript.damage;
+        healthText.text = "Enemy HP: " + health;
+        Destroy(other.gameObject);
+        //ABSTRACTION
+        DeathCheck();
     }
 
 

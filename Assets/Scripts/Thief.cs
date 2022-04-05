@@ -33,7 +33,7 @@ public class Thief : BaseClass
         abilityActiveTime = 5;
 
         ColorProjectile();
-        
+
 
     }
 
@@ -54,7 +54,7 @@ public class Thief : BaseClass
         inShadows = true;
         color.a = 0.3f;
         gameObject.GetComponent<MeshRenderer>().material.color = color;
-        currentTime = abilityActiveTime +1;
+        currentTime = abilityActiveTime + 1;
         abilityReady = false;
         abilityActive = true;
         yield return new WaitForSeconds(abilityActiveTime);

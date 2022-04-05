@@ -25,12 +25,12 @@ public class MainManager : MonoBehaviour
     private string currentClass;
 
     //ENCAPSULATION
-    [SerializeField] public string currentCheckMarkName {get; private set;}
-    [SerializeField] public GameObject currentCheckMark {get; private set;}
-    public bool gameOver {get; private set;} = true;
-    public static MainManager Instance {get; private set;}
-    
-    
+    [SerializeField] public string currentCheckMarkName { get; private set; }
+    [SerializeField] public GameObject currentCheckMark { get; private set; }
+    public bool gameOver { get; private set; } = true;
+    public static MainManager Instance { get; private set; }
+
+
 
     private void Awake()
     {
@@ -66,19 +66,19 @@ public class MainManager : MonoBehaviour
     {
         currentClass = button.name;
         currentCheckMark = checkMark;
-        currentCheckMarkName  = checkMark.name;
+        currentCheckMarkName = checkMark.name;
     }
 
     public void GameOver(string textToShow)
     {
-            gameOver = true;
-            gameOverScreen.SetActive(true);
-            TextMeshProUGUI gameOverText = gameOverScreen.transform.Find("GameOver Text").GetComponent<TextMeshProUGUI>();
+        gameOver = true;
+        gameOverScreen.SetActive(true);
+        TextMeshProUGUI gameOverText = gameOverScreen.transform.Find("GameOver Text").GetComponent<TextMeshProUGUI>();
 
-            gameOverText.text = textToShow;
+        gameOverText.text = textToShow;
 
 
-            DestroyProjectiles();
+        DestroyProjectiles();
     }
 
     private void StartGame()
@@ -90,16 +90,16 @@ public class MainManager : MonoBehaviour
             currentTime = 0;
 
             timerText = GameObject.Find("TimerText").GetComponent<TextMeshProUGUI>();
-            timerText.text = "Time: "  + currentTime;
-            
+            timerText.text = "Time: " + currentTime;
+
             gameOverScreen = GameObject.Find("GameOver");
-            gameOverScreen.SetActive(false); 
+            gameOverScreen.SetActive(false);
         }
         else
         {
             GameOver("No Class was selected, something went wrong");
         }
-            
+
     }
 
     private void SpawnCharacter(string name)
@@ -132,8 +132,8 @@ public class MainManager : MonoBehaviour
     private void DestroyProjectiles()
     {
         GameObject[] activeProjectiles = GameObject.FindGameObjectsWithTag("Projectile");
-        foreach(GameObject activeProjectile in activeProjectiles)
-        GameObject.Destroy(activeProjectile);       
+        foreach (GameObject activeProjectile in activeProjectiles)
+            GameObject.Destroy(activeProjectile);
     }
 
     //Enables OnSceneLoad
@@ -152,7 +152,6 @@ public class MainManager : MonoBehaviour
 
         if (scene.name == "Menu")
         {
-            //instructionsText = GameObject.Find("Instructions").GetComponent<TextMeshProUGUI>();
 
             if (currentCheckMark == null && !string.IsNullOrEmpty(currentCheckMarkName))
             {
@@ -166,6 +165,6 @@ public class MainManager : MonoBehaviour
     private void OnDisable()
     {
         SceneManager.sceneLoaded -= OnSceneLoaded;
-    } 
+    }
 
 }

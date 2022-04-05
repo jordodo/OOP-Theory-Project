@@ -12,6 +12,7 @@ using UnityEditor;
 
 public class SceneHandler : MonoBehaviour
 {
+    //Variables
     private GameObject currentButton;
     private Transform currentCheckmark;
     [SerializeField] private TextMeshProUGUI instructionsText;
@@ -30,7 +31,7 @@ public class SceneHandler : MonoBehaviour
     {
         if (MainManager.Instance.currentCheckMark != null && !string.IsNullOrEmpty(MainManager.Instance.currentCheckMarkName))
         {
-           SceneManager.LoadScene(1);  
+            SceneManager.LoadScene(1);  
         }
         else
         {

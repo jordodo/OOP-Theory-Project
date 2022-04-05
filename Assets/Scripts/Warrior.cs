@@ -18,8 +18,8 @@ public class Warrior : BaseClass
     //POLYMORPHISM
     protected override void CreateCharacter()
     {
-        health = 40;    
-        base.CreateCharacter();    
+        health = 40;
+        base.CreateCharacter();
         projectileScript.damage = 5;
         projectileScript.projectileSpeed = 3;
         ableToShoot = true;
@@ -30,7 +30,7 @@ public class Warrior : BaseClass
         abilityActiveTime = 0f;
 
         ColorProjectile();
-        
+
     }
 
     //POLYMORPHISM
@@ -38,7 +38,7 @@ public class Warrior : BaseClass
     {
         health = health + 10;
         healthText.text = "Your HP: " + health;
-        currentTime = abilityActiveTime +1;
+        currentTime = abilityActiveTime + 1;
         abilityReady = false;
         abilityActive = true;
         yield return new WaitForSeconds(abilityActiveTime);
