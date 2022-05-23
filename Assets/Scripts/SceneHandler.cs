@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using TMPro;
 using System.IO;
+using System.Runtime.InteropServices;
 
 #if UNITY_EDITOR
 using UnityEditor;
@@ -16,6 +17,9 @@ public class SceneHandler : MonoBehaviour
     private GameObject currentButton;
     private Transform currentCheckmark;
     [SerializeField] private TextMeshProUGUI instructionsText;
+
+    [DllImport("__Internal")]
+    private static extern void Reload();
 
 
     private void ChooseClass()
@@ -48,6 +52,9 @@ public class SceneHandler : MonoBehaviour
     {
         #if UNITY_EDITOR
             EditorApplication.ExitPlaymode();
+        #elif (UNITY_WEBGL)
+            //Application.Quit();
+            Reload();
         #else
             Application.Quit();
         #endif
